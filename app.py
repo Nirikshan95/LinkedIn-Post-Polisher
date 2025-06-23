@@ -22,9 +22,12 @@ def main():
             # Load the message graph
             graph = load_graph()
             with  st.spinner("Generating post..."):
-                result=graph.invoke(HumanMessage(content=topic))
+                result=graph.invoke([HumanMessage(content=topic)])
+                print(f'type of result : {type(result)}')
                 st.subheader("Graph Result")
                 st.markdown(result)
+                print(f"\n\n optimized Result: {result[-1].content}")
+                st.markdown(result[-1].content)
     
 if __name__ == "__main__":
     main()
