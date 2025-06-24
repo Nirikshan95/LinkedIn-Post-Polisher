@@ -1,5 +1,5 @@
 # Model parameters
-REPO_ID="mistralai/Mistral-7B-Instruct-v0.2"
+REPO_ID="deepseek-ai/DeepSeek-V3-0324"
 TEMPERATURE=0.9
 MAX_NEW_TOKENS=512
 

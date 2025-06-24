@@ -1,9 +1,5 @@
 from langchain_core.prompts import ChatPromptTemplate,MessagesPlaceholder
 from langchain_core.runnables import RunnableLambda
-from langchain_core.messages import HumanMessage
-from pydantic import BaseModel, Field
-from typing import Annotated
-from langchain_core.output_parsers import PydanticOutputParser
 from src.chat_model import load_chat_model
 from src.schema import Post, Critique,content_parser
 from config import REPO_ID, TEMPERATURE, MAX_NEW_TOKENS
@@ -16,7 +12,7 @@ def generator_chain():
         [
             ("system", """You are a professional AI writing assistant that helps users create engaging LinkedIn posts.
 
-    create an best engaging LinkedIn post for user's request.
+    create an best engaging LinkedIn post for user's request in the average post length  150 to 300 words.
 
     Guidelines:
     - Use a strong opening line to hook attention.
@@ -26,7 +22,7 @@ def generator_chain():
 
     if user provides recommendations or critique , respond with revised version of your previous post.
 
-    Return only the post content.
+    Return only the string of post content.
     format instructions :
     {format_instructions}
     """),
@@ -48,7 +44,9 @@ def reflection_chain():
     5. length and conciseness 
     etc
 
-    Listout specific improvements to enhance the post. Be helpful, not harsh. Return your reflection as bullet points.
+    List specific improvements to enhance the post. Be helpful, not harsh. Return your reflection as bullet points.
+    Return all the bullet points as a single string.
+    
     format instructions :
     {format_instructions}
     """),
